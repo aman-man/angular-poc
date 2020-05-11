@@ -1,0 +1,43 @@
+<p>login works!</p>
+<div class="col-md-12">
+  <div>
+    <h2 class="text-center">{{header}}</h2>
+  </div>
+  <div class="jumbotron">
+    <div class="login-container">
+      <div class="col-md-12">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="userEmail" placeholder="abc@gmail.com">
+            <span class="error-message" *ngIf="loginForm.get('userEmail').errors && (loginForm.get('userEmail').dirty || loginForm.get('userEmail').touched)">
+              <span *ngIf="loginForm.get('userEmail').errors.required">
+                Email is required.
+              </span>
+              <span *ngIf="loginForm.get('userEmail').errors.email">
+                Email is invalid.
+              </span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="userPassword" maxlength="6" placeholder="Enter password minimun 6 digit">
+            <span class="error-message" *ngIf="loginForm.get('userPassword').errors && (loginForm.get('userPassword').dirty || loginForm.get('userPassword').touched)">
+              <span *ngIf="loginForm.get('userPassword').errors.required">
+                Password is required.
+              </span>
+            </span>
+          </div> 
+          <div class="form-group">
+            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button> &nbsp;
+            <button class="btn btn-danger" type="reset">Cancel</button> &nbsp;
+          </div>
+          <div>
+            <p>If you haven't Register yet, Please Register First</p>
+            <a class="btn btn-success" routerLink="/registration" routerLinkActive="active">Register Here</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

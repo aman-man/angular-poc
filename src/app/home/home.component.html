@@ -1,0 +1,157 @@
+<!-- <p>home works!</p> -->
+<h1 class="text-center"> Employee's List</h1>
+<div class="row">
+  <!-- this is a row which contain total sum of column will be 12 -->
+  <div class="col-md-12 p-2 border bg-info text-light">
+    <div class="row">
+      <div class="col-md-1 border-right text-center">
+        ID
+      </div>
+      <div class="col-md-1 border-right text-center">
+        Name
+      </div>
+      <div class="col-md-2 border-right text-center">
+        Email
+      </div>
+      <div class="col-md-2 border-right text-center">
+        Job Designation
+      </div>
+      <div class="col-md-2 border-right text-center">
+        Mobile No.
+      </div>
+      <div class="col-md-2 border-right text-center">
+        Website
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngFor="let employee of employeeList">
+  <div class="col-md-1 border p-2 text-center">
+    {{employee.id}}
+  </div>
+  <div class="col-md-1 border p-2 text-center">
+    {{employee.name}}
+  </div>
+  <div class="col-md-2 border p-2 text-center">
+    {{employee.email}}
+  </div>
+  <div class="col-md-2 border p-2 text-center">
+    {{employee.jobtitle}}
+  </div>
+  <div class="col-md-2 border p-2 text-center">
+    {{employee.phone}}
+  </div>
+  <div class="col-md-2 border p-2 text-center">
+    {{employee.website}}
+  </div>
+  <div class="col-md-2 border p-2 text-center">
+    <button class="btn btn-warning" (click)="GetValueInForm(employee)">Edit</button>&nbsp;
+    <button class="btn btn-danger" (click)="removeEmployeeDetail(employee.id)">Delete</button>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div>
+    <h2 class="text-center">{{header}}</h2>
+  </div>
+  <div class="jumbotron">
+    <div class="register-container">
+      <div class="col-md-12">
+        <form [formGroup]="employeeRegisterForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" formControlName="name" placeholder="Name">
+            <span
+              *ngIf="employeeRegisterForm.get('name').errors && (employeeRegisterForm.get('name').touched || employeeRegisterForm.get('name').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('fname').errors.required">Name is a
+                required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input class="form-control" formControlName="phone" placeholder="Phone">
+            <span
+              *ngIf="employeeRegisterForm.get('phone').errors && (employeeRegisterForm.get('phone').touched || employeeRegisterForm.get('phone').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('phone').errors.required">Phoneis a
+                required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="abc@gmail.com">
+            <span
+              *ngIf="employeeRegisterForm.get('email').errors && (employeeRegisterForm.get('email').touched || employeeRegisterForm.get('email').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('email').errors.required">Email is a
+                required field.</span>
+              <span class="error-message" *ngIf="employeeRegisterForm.get('email').errors.email">Enter a valid
+                emailId.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>User Name</label>
+            <input class="form-control" formControlName="username" placeholder="User Name">
+            <span
+              *ngIf="employeeRegisterForm.get('username').errors && (employeeRegisterForm.get('username').touched || employeeRegisterForm.get('username').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('username').errors.required">User Name is a
+                required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Job Title</label>
+            <input class="form-control" formControlName="jobtitle" placeholder="Job Title">
+            <span
+              *ngIf="employeeRegisterForm.get('jobtitle').errors && (employeeRegisterForm.get('jobtitle').touched || employeeRegisterForm.get('jobtitle').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('jobtitle').errors.required">Job Title is a
+                required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Website</label>
+            <input class="form-control" formControlName="website" placeholder="Website">
+            <span *ngIf="employeeRegisterForm.get('website').errors && (employeeRegisterForm.get('website').touched || employeeRegisterForm.get('website').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('website').errors.required">Website is a
+                required field.</span>
+            </span>
+          </div>
+          <div class="form-group" formGroupName="address">
+            <label>Address:</label><br>
+            <label>Street</label>
+            <input class="form-control" formControlName="street" placeholder="Street">
+            <label>Suite</label>
+            <input class="form-control" formControlName="suite" placeholder="Suite">
+            <label>City</label>
+            <input class="form-control" formControlName="city" placeholder="City">
+            <label>Zip Code</label>
+            <input class="form-control" formControlName="zipcode" placeholder="Zip Code">
+            <div class="form-group" formGroupName="geo">
+              <label>Geographic Position</label><br>
+              <label>Longitude</label>
+              <input class="form-control" formControlName="lng" placeholder="Longitude">
+              <label>Latitude</label>
+              <input class="form-control" formControlName="lat" placeholder="Latitute">
+            </div>
+            <!-- <span *ngIf="employeeRegisterForm.get('street').errors && (employeeRegisterForm.get('street').touched || employeeRegisterForm.get('street').dirty)">
+              <span class="error-message" *ngIf="employeeRegisterForm.get('street').errors.required">Last name is a
+                required field.</span>
+            </span> -->
+          </div>
+          <div class="form-group" formGroupName="company">
+            <label>Company Details:</label><br>
+            <label>Name</label>
+            <input class="form-control" formControlName="name" placeholder="Company Name">
+            <label>Catch Phrase</label>
+            <input class="form-control" formControlName="catchPhrase" placeholder="Catch Phrase">
+            <label>BS</label>
+            <input class="form-control" formControlName="bs" placeholder="BS">
+          </div>
+          <div class="form-group">
+            <button type="submit" *ngIf="isEdit" class="btn btn-success" (click)="updateEmployeeDetail(employeeRegisterForm.value)" [disabled]="employeeRegisterForm.invalid">Update Details</button>
+            <button type="submit" *ngIf="!isEdit"class="btn btn-primary" (click)="saveNewEmployee()" [disabled]="employeeRegisterForm.invalid">Save Details</button>
+            &nbsp;
+            <button type="reset" class="btn btn-danger">Cancel</button>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>

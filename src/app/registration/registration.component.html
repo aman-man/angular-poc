@@ -1,0 +1,51 @@
+<p>registration works!</p>
+<div class="col-md-12">
+  <div>
+    <h2 class="text-center">{{header}}</h2>
+  </div>
+  <div class="jumbotron">
+    <div class="register-container">
+      <div class="col-md-12">
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          <div class="form-group">
+            <label>First Name</label>
+            <input class="form-control" formControlName="fname" placeholder="First Name">
+            <span *ngIf="registerForm.get('fname').errors && (registerForm.get('fname').touched || registerForm.get('fname').dirty)">
+              <span class="error-message" *ngIf="registerForm.get('fname').errors.required">First name is a required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input class="form-control" formControlName="lname" placeholder="last name">
+            <span *ngIf="registerForm.get('lname').errors && (registerForm.get('lname').touched || registerForm.get('lname').dirty)">
+              <span class="error-message" *ngIf="registerForm.get('lname').errors.required">Last name is a required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="emailId" placeholder="abc@gmail.com">
+            <span *ngIf="registerForm.get('emailId').errors && (registerForm.get('emailId').touched || registerForm.get('emailId').dirty)">
+              <span class="error-message" *ngIf="registerForm.get('emailId').errors.required">Last name is a required field.</span>
+              <span class="error-message" *ngIf="registerForm.get('emailId').errors.email">Enter a valid emailId.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="userPassword" maxlength="6" placeholder="Enter password minimun 6 digit">
+            <span *ngIf="registerForm.get('userPassword').errors && (registerForm.get('userPassword').touched || registerForm.get('userPassword').dirty)">
+              <span class="error-message" *ngIf="registerForm.get('userPassword').errors.required">Last name is a required field.</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button> &nbsp;
+            <button type="reset" class="btn btn-danger">Cancel</button>
+          </div>
+          <div>
+            <p>If you have already Register, Please Logged-in</p>
+            <a class="btn btn-success" routerLink="/login" routerLinkActive="active">Login Here</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
