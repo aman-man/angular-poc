@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit {
         this.user = data;
         console.log(this.user);
       });
+      this.employeeRegisterForm.reset();
     this.getEmployeList();
   }
   GetValueInForm(selectedEmployee) {
@@ -106,6 +107,7 @@ export class HomeComponent implements OnInit {
     this._employeService.updateEmployeeDetail(updatedEmployeeDetail)
       .subscribe(data => {
         this.user = data;
+        this.employeeRegisterForm.reset();
         console.log(this.user);
       });
     
