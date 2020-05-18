@@ -9,16 +9,15 @@ import { FormBuilder, FormGroup, Validators, FormControl, NgForm } from '@angula
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  employeeList;
+  employeeList: any[] = [];
+  // filteredList: any[] = [];
   user;
   isEdit: boolean = false;
   selectedId: Number;
+  searchTerm: string = '';
+  lowercase: boolean = false;
   header: string = 'Employee-Registration-Form';
   employeeRegisterForm: FormGroup;
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  password: string = '';
 
   constructor(
     private _employeService: HomeService,
@@ -56,9 +55,7 @@ export class HomeComponent implements OnInit {
     console.log('i initiates');
     this._employeService.getEmployees().subscribe(data => {
       this.employeeList = data;
-      console.log('resp1', this.employeeList);
     })
-    console.log('resp2', this.employeeList);
   }
 
   saveNewEmployee() {
@@ -124,5 +121,26 @@ export class HomeComponent implements OnInit {
 
     this.getEmployeList();
   }
+
+  // search(searchTerm) {
+  //   this.filteredList = [];
+  //   let count = 0;
+  //   console.log('searchKey:', searchTerm);
+  //   if (searchTerm) {
+  //     this.employeeList.map((search) => {
+  //       let name: string = search.name;
+  //       if (name.includes(searchTerm)) {
+  //         console.log('Search: ', search);
+  //         this.filteredList.push(search);
+  //       }
+  //       if (count == (this.employeeList.length - 1)) {
+  //         this.employeeList = this.filteredList;
+  //       }
+  //       count = count + 1;
+  //     });
+  //   } else {
+  //     this.getEmployeList();
+  //   }
+  // }
 
 }

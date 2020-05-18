@@ -1,5 +1,11 @@
-<!-- <p>home works!</p> -->
 <h1 class="text-center m-4"> Employee's List</h1>
+<div class="row">
+  <div class="col-md-4 search">
+    <label>Search Filter:</label>
+    <!-- <input class="form-control" [ngModel]="searchTerm" type="text" (ngModelChange)="search($event)" placeholder="Search here..."> -->
+    <input class="form-control" [(ngModel)]="searchTerm" type="text" placeholder="Search here...">
+  </div>
+</div>
 <div class="row">
   <!-- this is a row which contain total sum of column will be 12 -->
   <div class="col-md-12 container border bg-info text-light">
@@ -28,28 +34,37 @@
     </div>
   </div>
 </div>
-<div class="row" *ngFor="let employee of employeeList">
-  <div class="col-md-1 border p-2 text-center">
-    {{employee.id}}
+<ng-container  *ngIf="employeeList.length != 0">
+
+  <div class="row" *ngFor="let employee of employeeList | search:searchTerm:lowercase">
+    <div class="col-md-1 border p-2 text-center">
+      {{employee.id}}
+    </div>
+    <div class="col-md-1 border p-2 text-center">
+      {{employee.name}}
+    </div>
+    <div class="col-md-2 border p-2 text-center">
+      {{employee.email}}
+    </div>
+    <div class="col-md-2 border p-2 text-center">
+      {{employee.jobtitle}}
+    </div>
+    <div class="col-md-2 border p-2 text-center">
+      {{employee.phone}}
+    </div>
+    <div class="col-md-2 border p-2 text-center">
+      {{employee.website}}
+    </div>
+    <div class="col-md-2 border p-2 text-center">
+      <button class="btn btn-warning" (click)="GetValueInForm(employee)">Edit</button>&nbsp;
+      <button class="btn btn-danger" (click)="removeEmployeeDetail(employee.id)">Delete</button>
+    </div>
   </div>
-  <div class="col-md-1 border p-2 text-center">
-    {{employee.name}}
-  </div>
-  <div class="col-md-2 border p-2 text-center">
-    {{employee.email}}
-  </div>
-  <div class="col-md-2 border p-2 text-center">
-    {{employee.jobtitle}}
-  </div>
-  <div class="col-md-2 border p-2 text-center">
-    {{employee.phone}}
-  </div>
-  <div class="col-md-2 border p-2 text-center">
-    {{employee.website}}
-  </div>
-  <div class="col-md-2 border p-2 text-center">
-    <button class="btn btn-warning" (click)="GetValueInForm(employee)">Edit</button>&nbsp;
-    <button class="btn btn-danger" (click)="removeEmployeeDetail(employee.id)">Delete</button>
+</ng-container>
+
+<div class="row" *ngIf="employeeList.length == 0">
+  <div class="col-md-12 text-center border p-2">
+    No Data for display.
   </div>
 </div>
 
